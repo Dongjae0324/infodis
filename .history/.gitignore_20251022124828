@@ -1,6 +1,0 @@
-#Python cache
-__pycache__/
-*.pyc
-
-#Others
-*.pt
