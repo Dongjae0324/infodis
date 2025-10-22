@@ -1,0 +1,74 @@
+# defaults:
+#   - _self_
+#   - model: small_radd
+#   - override hydra/launcher: submitit_slurm
+
+ngpus: 1
+tokens: 50257
+gpt_dir: gpt2-large
+# mp: False
+# outdir: ../output
+
+
+training:
+  batch_size: 32
+  # batch_size: 64
+  accum: 1
+  # n_iters: 1000001
+  n_iters: 7501
+  snapshot_freq: 3000
+  log_freq: 500
+  # eval_freq: 100
+  snapshot_freq_for_preemption: 10000
+  weight: standard
+  snapshot_sampling: True
+  ema: 0.9999
+  # loss_type: t_DCE
+  loss_type: lambda_DCE
+
+model:
+  name: small_radd
+  type: ddit_wot
+  # hidden_size: 512
+  hidden_size: 256
+  cond_dim: 128
+  # length: 1024
+  length: 256
+  # length: 512
+  n_blocks: 8
+  # n_blocks: 12
+  # n_heads: 12
+  n_heads: 8
+  dropout: 0.02
+  use_checkpoint: False
+  dtype: float16
+
+data:
+  train: text8
+  valid: text8
+  cache_dir: data
+
+noise:
+  type: loglinear
+  sigma_min: 1e-4
+  sigma_max: 20
+
+sampling:
+  predictor: euler
+  steps: 1024
+
+eval:
+  batch_size: 32
+  # batch_size: 64
+  perplexity: False
+  perplexity_batch_size: 16
+
+optim:
+  weight_decay: 0
+  optimizer: AdamW
+  lr: 3e-4
+  beta1: 0.9
+  beta2: 0.999
+  eps: 1e-8
+  warmup: 2500
+  grad_clip: 1.

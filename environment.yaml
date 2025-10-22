@@ -1,0 +1,21 @@
+name: infodis
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+dependencies:
+  - python=3.11
+  - numpy=1.26.4
+  - matplotlib=3.10.1
+  - einops=0.8.0
+  - tqdm=4.67.1
+  - omegaconf=2.3.0
+  - transformers=4.44.2
+  - datasets=3.5.0
+  - pip
+  - pip:
+      - torch==2.3.0
+      - accelerate==0.32.0
+      - huggingface-hub==0.30.2
+      - safetensors==0.4.5
+      - lm-eval==0.4.5

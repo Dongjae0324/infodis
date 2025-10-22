@@ -1,0 +1,9 @@
+#Python cache
+__pycache__/
+*.pyc
+
+#Folders
+det_outputs/
+
+#Others
+*.pt
